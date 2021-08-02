@@ -1,0 +1,25 @@
+type Doctor @model {
+  id: ID!
+  name: String!
+  email: String!
+  description: String
+}
+
+type Patient @model {
+  id: ID!
+  name: String!
+  email: String!
+  description: String
+}
+
+type Booking @model {
+  id: ID!
+  patient: String!
+  doctor: String!
+  datetime: String
+}
+
+type Mutation {
+  SendMail(data:AWSJSON):AWSJSON @function(name:"bookingf606a9b4-dev")
+}
+

@@ -23,11 +23,22 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+body {
+  font-family: 'Roboto', sans-serif;
+  }
+
+label {
+  font-size: .7rem;
+}
 
 .App-link {
   color: #61dafb;
 }
-
+.error {
+  position: absolute;
+  color: red;
+  font-size: .6rem;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
