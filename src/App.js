@@ -20,22 +20,22 @@ const App = () => {
       path: "/",
       exact: true,
       sidebar: () => <div></div>,
-      main: () => (<Doctor/>),
+      main: () => (<Doctor text="Doctor"/>),
     },
     {
       path: "/patient",
       sidebar: () => <div></div>,
-      main: () => (<Patient/>),
+      main: () => (<Patient text="Patient"/>),
     },
     {
       path: "/booking",
       sidebar: () => <div></div>,
-      main: () => (<Booking/>),
+      main: () => (<Booking text="Booking"/>),
     },
     {
       path: "/sendmail",
       sidebar: () => <div></div>,
-      main: () => (<SendMail/>),
+      main: () => (<SendMail text="Send Mail"/>),
     },
   ];
   const [isOpen, setIsOpen] = useState(true);
@@ -45,7 +45,7 @@ const App = () => {
   return (
     <>
     <ReactNotification />
-      <Navbar color="light" light expand="md">
+      <Navbar  color="success"  light expand="md">
         <NavbarToggler onClick={toggleHome} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>

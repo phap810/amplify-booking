@@ -14,7 +14,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-const Booking = () => {
+const Booking = (props) => {
   const { doctor } = useContext(DoctorContext);
   const { patient } = useContext(PatientContext);
   const {
@@ -33,10 +33,10 @@ const Booking = () => {
   return (
     <Container>
       <Modal isOpen={modal} toggle={toggle} className="Show">
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>{props.text}</ModalHeader>
         <Form>
           <ModalBody>
-            <FormGroup>
+            <FormGroup className="mb-4">
               <Input
                 value={formEditBooking.doctor}
                 onChange={(event) =>
@@ -54,7 +54,7 @@ const Booking = () => {
                 ))}
               </Input>
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="mb-4">
               <Input
                 onChange={(event) =>
                   setInputEditBooking("patient", event.target.value)
@@ -72,7 +72,7 @@ const Booking = () => {
                 ))}
               </Input>
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="mb-4">
               <Input
                 type="datetime-local"
                 value={formEditBooking.datetime}
@@ -85,18 +85,17 @@ const Booking = () => {
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={editBooking}>Edit doctor</Button>
-            <Button color="secondary" onClick={toggle}>
+            <Button color="success" onClick={editBooking}>Edit doctor</Button>
+            <Button color="danger" onClick={toggle}>
               Cancel
             </Button>
           </ModalFooter>
         </Form>
       </Modal>
       <div>
-        <h2>Booking</h2>
-        <br />
+        <h2 className="mb-4">{props.text} Management</h2>
         <Form>
-          <FormGroup>
+          <FormGroup className="mb-4">
             <Input
               value={formBooking.doctor}
               onChange={(event) =>
@@ -114,7 +113,7 @@ const Booking = () => {
               ))}
             </Input>
           </FormGroup>
-          <FormGroup>
+          <FormGroup className="mb-4">
             <Input
               onChange={(event) =>
                 setInputBooking("patient", event.target.value)
@@ -132,7 +131,7 @@ const Booking = () => {
               ))}
             </Input>
           </FormGroup>
-          <FormGroup>
+          <FormGroup className="mb-4">
             <Input
               type="datetime-local"
               value={formBooking.datetime}
@@ -143,18 +142,17 @@ const Booking = () => {
             />
             <br />
           </FormGroup>
-
-          <Button onClick={addBooking}>Booking</Button>
+          <Button color="success" onClick={addBooking}>{props.text}</Button>
         </Form>
       </div>
-      <Table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
             <th>Patient</th>
             <th>Doctor</th>
             <th>Datetime</th>
-            <th>Actions</th>
+            <th colSpan="2" style={{ textAlign: "center", verticalAlign: "middle" }}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -164,11 +162,13 @@ const Booking = () => {
               <td>{todo.patient}</td>
               <td>{todo.doctor}</td>
               <td>{todo.datetime}</td>
-              <td>
+              <td style={{ textAlign: "center", verticalAlign: "middle" }}>
                 <Button color="danger" onClick={() => getBookingByid(todo.id)}>
                   edit
                 </Button>
-                <Button onClick={() => removeBooking(todo.id)}>delete</Button>
+              </td>
+              <td style={{ textAlign: "center", verticalAlign: "middle" }}>
+                <Button color="danger" onClick={() => removeBooking(todo.id)}>delete</Button>
               </td>
             </tr>
           ))}

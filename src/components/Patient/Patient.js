@@ -12,7 +12,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-const Patient = () => {
+const Patient = (props) => {
   const {
     patient,
     formPatient,
@@ -29,10 +29,10 @@ const Patient = () => {
   return (
     <Container>
       <Modal isOpen={modal} toggle={toggle} className="Show">
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>{props.text}</ModalHeader>
         <Form>
           <ModalBody>
-            <FormGroup>
+            <FormGroup className="mb-4">
               <Input
                 value={formEditPatient.name}
                 placeholder="Name"
@@ -40,9 +40,8 @@ const Patient = () => {
                   setInputEditPatient("name", event.target.value)
                 }
               />
-              <br />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="mb-4">
               <Input
                 value={formEditPatient.email}
                 placeholder="Email"
@@ -50,9 +49,8 @@ const Patient = () => {
                   setInputEditPatient("email", event.target.value)
                 }
               />
-              <br />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="mb-4">
               <Input
                 value={formEditPatient.description}
                 placeholder="Description"
@@ -60,38 +58,35 @@ const Patient = () => {
                   setInputEditPatient("description", event.target.value)
                 }
               />
-              <br />
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={editPatient}>Edit doctor</Button>
-            <Button color="secondary" onClick={toggle}>
+            <Button outline color="success" onClick={editPatient}>Edit {props.text}</Button>
+            <Button color="danger" onClick={toggle}>
               Cancel
             </Button>
           </ModalFooter>
         </Form>
       </Modal>
       <div>
-        <h2>Patient Management</h2>
-        <br />
+        <h2 className="mb-4">{props.text} Management</h2>
         <Form>
-          <FormGroup>
-            <Input
+          <FormGroup className="mb-4">
+            <Input 
               value={formPatient.name}
               placeholder="Name"
               onChange={(event) => setInputPatient("name", event.target.value)}
             />
-            <br />
+            
           </FormGroup>
-          <FormGroup>
+          <FormGroup className="mb-4">
             <Input
               value={formPatient.email}
               placeholder="Email"
               onChange={(event) => setInputPatient("email", event.target.value)}
             />
-            <br />
           </FormGroup>
-          <FormGroup>
+          <FormGroup className="mb-4">
             <Input
               value={formPatient.description}
               placeholder="Description"
@@ -101,17 +96,17 @@ const Patient = () => {
             />
             <br />
           </FormGroup>
-          <Button onClick={addPatient}>Add patient</Button>
+          <Button color="success" onClick={addPatient}>Add {props.text}</Button>
         </Form>
       </div>
-      <Table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
             <th>Description</th>
-            <th>Actions</th>
+            <th colSpan="2" style={{ textAlign: "center", verticalAlign: "middle" }}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -121,10 +116,12 @@ const Patient = () => {
               <td>{todo.name}</td>
               <td>{todo.email}</td>
               <td>{todo.description}</td>
-              <td>
+              <td style={{ textAlign: "center", verticalAlign: "middle" }}>
                 <Button color="danger" onClick={() => getPatientByid(todo.id)}>
                   edit
                 </Button>
+              </td>
+              <td style={{ textAlign: "center", verticalAlign: "middle" }}>
                 <Button color="danger" onClick={() => removePatient(todo.id)}>
                   delete
                 </Button>

@@ -12,7 +12,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-const Doctor = () => {
+const Doctor = (props) => {
   const {
     editDoctor,
     formEditDoctor,
@@ -29,7 +29,7 @@ const Doctor = () => {
   return (
     <Container>
       <Modal isOpen={modal} toggle={toggle} className="Show">
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>{props.text}</ModalHeader>
         <Form>
           <ModalBody>
             <FormGroup>
@@ -64,15 +64,15 @@ const Doctor = () => {
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={editDoctor}>Edit doctor</Button>
-            <Button color="secondary" onClick={toggle}>
+            <Button color="success" onClick={editDoctor}>Edit {props.text}</Button>
+            <Button color="danger" onClick={toggle}>
               Cancel
             </Button>
           </ModalFooter>
         </Form>
       </Modal>
       <div>
-        <h2>Doctor Management</h2>
+        <h2>{props.text} Management</h2>
         <br />
         <Form>
           <FormGroup>
@@ -102,7 +102,7 @@ const Doctor = () => {
             />
             <br />
           </FormGroup>
-          <Button onClick={addDoctor}>Add doctor</Button>
+          <Button className="mb-4" color="success" onClick={addDoctor}>Add {props.text}</Button>
         </Form>
       </div>
       <Table striped bordered hover>
@@ -122,7 +122,6 @@ const Doctor = () => {
               <td>{todo.name}</td>
               <td>{todo.email}</td>
               <td>{todo.description}</td>
-              
                 <td style={{textAlign: "center", verticalAlign: "middle"}}>
                   <Button color="danger" onClick={() => getDoctorByid(todo.id)}>
                     edit
@@ -133,7 +132,6 @@ const Doctor = () => {
                     delete
                   </Button>
                 </td>
-              
             </tr>
           ))}
         </tbody>
